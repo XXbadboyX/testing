@@ -1,0 +1,293 @@
+/* mobile.css - Mobile enhancements for style.css */
+
+/* General Mobile Adjustments - Applies to screens <= 768px */
+@media (max-width: 768px) {
+    /* Header & Nav */
+    .nav-container {
+        padding: 0 1rem;
+    }
+    .logo img {
+        height: 50px; /* Smaller logo on mobile */
+    }
+    .main-nav {
+        display: none; /* Hidden by default on mobile */
+        position: absolute;
+        top: 100%; /* Below the header */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        flex-direction: column; /* Stack nav items */
+        gap: 0.5rem;
+    }
+    .main-nav.active {
+        display: flex; /* Show when active */
+    }
+    .mobile-menu-toggle {
+        display: block; /* Show mobile toggle button */
+    }
+    .nav-item {
+        width: 100%; /* Full width for nav items */
+    }
+    .nav-link {
+        padding: 0.75rem 1rem; /* Larger tap target */
+        border-bottom: 1px solid #f0f0f0; /* Separator for list items */
+        position: relative; /* For dropdown arrow */
+    }
+    .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+
+    /* Dropdown specific for mobile */
+    .dropdown > .nav-link::after {
+        content: "▼"; /* Down arrow */
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+    }
+    .dropdown.active > .nav-link::after {
+        content: "▲"; /* Up arrow when active */
+    }
+    .dropdown-menu {
+        /* Changed: Ensure display is flex from the start for transitions to work,
+           but keep it visually hidden by max-height, opacity, and visibility. */
+        display: flex; /* Changed from 'none' for smooth transitions */
+        flex-direction: column; /* Ensure items stack vertically */
+        position: static; /* No absolute positioning, allows it to flow in document */
+        box-shadow: none;
+        padding-left: 1.5rem; /* Indent sub-items */
+        gap: 0.25rem; /* Smaller gap */
+        overflow: hidden; /* Hide overflow during transition */
+        max-height: 0; /* Collapsed by default */
+        /* Adjusted transition for smoother mobile dropdown */
+        transition: max-height 0.3s ease-out, opacity 0.2s ease, visibility 0.2s ease; 
+        opacity: 0;
+        visibility: hidden; /* Hide completely */
+    }
+    .dropdown.active .dropdown-menu {
+        display: flex; /* Show flex for active state */
+        max-height: 500px; /* Arbitrary large height to allow content to show */
+        opacity: 1;
+        visibility: visible;
+        transition: max-height 0.5s ease-in, opacity 0.3s ease 0.1s, visibility 0.3s ease;
+    }
+    /* Disable desktop hover effects on mobile to prevent interference */
+    .dropdown:hover .dropdown-menu {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* Hero section for mobile */
+    .hero {
+        height: auto;
+        min-height: 80vh; /* Ensure some height even if content is short */
+        padding: 2rem 1rem;
+        margin-top: 60px; /* Offset header */
+    }
+    .hero-bg-image {
+        width: 100%; /* Ensure image fills container */
+        height: 100%; /* Ensure image fills container */
+        object-fit: cover; /* Maintain aspect ratio while covering */
+    }
+    .hero-background-slider {
+        left: -50%; /* Remove negative left margin for mobile */
+        width: 100%; /* Ensure it takes full width */
+    }
+    .hero-content {
+        padding: 1rem;
+    }
+    .hero-logo {
+        width: 80%; /* Smaller logo */
+        max-width: 250px; /* Cap its size */
+    }
+    .hero-content h1 {
+        font-size: 2rem; /* Smaller heading */
+    }
+    .hero-buttons-container {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 0.8rem;
+        width: 100%; /* Make buttons full width */
+    }
+    .hero-button {
+        width: 100%; /* Full width for buttons */
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    /* Content Blocks & Sections */
+    .container {
+        padding: 0 1rem; /* Consistent padding */
+    }
+    h1 {
+        font-size: 2.2rem; /* Adjust global h1 for mobile */
+    }
+    h2 {
+        font-size: 1.6rem; /* Adjust global h2 for mobile */
+    }
+    .section-tagline {
+        font-size: 1.5rem;
+    }
+    .section-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    /* Partner logos adjustments */
+    .partner-logos-container {
+        gap: 1.5rem; /* Smaller gap */
+        margin-bottom: 2rem;
+    }
+    .partner-logo-link img {
+        height: 50px; /* Smaller logos */
+    }
+
+    /* Methodology section improvements */
+    .methodology-compound {
+        flex-direction: column; /* Stack items */
+        gap: 1rem;
+    }
+    .methodology-item {
+        flex: 1 1 100%; /* Take full width */
+        max-width: none; /* No max width */
+    }
+    .methodology-image {
+        max-width: 150px; /* Keep image manageable */
+    }
+
+    /* Project Objectives - crucial for alignment */
+    .project-objectives {
+        flex-direction: column; /* Stack objective items */
+        gap: 0.75rem;
+    }
+    .objective-item {
+        flex: 1 1 100%; /* Take full width */
+        min-width: unset; /* Remove min-width constraint */
+        padding: 1rem;
+        flex-direction: row; /* Ensure icon and text are side-by-side */
+        align-items: flex-start; /* Align them to the top */
+        text-align: left; /* Ensure overall item text alignment is left */
+    }
+    .objective-image {
+        flex-shrink: 0; /* Prevent image from shrinking */
+        width: 45px; /* Smaller icons on mobile */
+        height: 45px;
+        margin-right: 0.75rem; /* Space between icon and text */
+        margin-bottom: 0; /* Remove bottom margin if flex row */
+    }
+    .objective-item-content {
+        padding-left: 0; /* No extra padding as gap handles it */
+        text-align: left; /* Ensure text alignment is left */
+    }
+    .objective-item-content h2 {
+        font-size: 1.1em; /* Adjust heading size within item */
+        margin-bottom: 0.2rem;
+        text-align: left;
+    }
+    .objective-item-content p {
+        font-size: 0.9em; /* Adjust paragraph size within item */
+        text-align: left;
+    }
+
+    /* Survey Section */
+    .survey .container {
+        flex-direction: column; /* Stack heading and button */
+        align-items: center; /* Center them */
+        text-align: center; /* Center survey text */
+    }
+    .survey .container h1 {
+        font-size: 1.8rem;
+        text-align: center; /* Center h1 on mobile */
+        margin-bottom: 1rem; /* Space below h1 */
+    }
+    .survey-button {
+        width: 80%; /* Make button wider */
+        max-width: 300px; /* Cap width */
+        margin: 0; /* Remove margin */
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    /* Demo Sites */
+    .demo-sites-img-holder {
+        flex-direction: column; /* Stack images */
+        gap: 1rem;
+    }
+    .demo-sites-image {
+        max-width: 100%; /* Take full width */
+        margin-bottom: 0.5rem; /* Smaller margin */
+    }
+
+    /* News Field */
+    .news-field .container h1 {
+        font-size: 2.2rem; /* Adjust h1 for news field */
+    }
+    .news-link-button {
+        width: 80%;
+        max-width: 250px;
+        margin-top: 1rem;
+    }
+
+    /* Footer */
+    footer .container {
+        flex-direction: column; /* Stack footer content vertically */
+        text-align: center; /* Center all footer text */
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+    footer .footer-content,
+    footer .contact {
+        flex: 1 1 100%; /* Take full width */
+        min-width: unset;
+        text-align: center; /* Center text in stacked blocks */
+    }
+    footer h1, footer h2 {
+        text-align: center; /* Center footer headings */
+        margin-bottom: 0.5rem;
+    }
+    footer .contact {
+        margin-left: 0; /* Remove left margin */
+    }
+}
+
+/* Specific adjustments for smaller mobile devices (e.g., phones) */
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    h1 { /* Smaller global h1 for very small screens */
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    .section-tagline {
+        font-size: 1.3rem;
+    }
+    .section-description {
+        font-size: 1rem;
+    }
+    .partner-logo-link img {
+        height: 40px; /* Even smaller logos */
+    }
+    .hero-button {
+        padding: 8px 15px; /* Smaller buttons */
+        font-size: 0.9rem;
+    }
+}
+
+/* Very small devices (e.g., iPhone SE/old phones) */
+@media (max-width: 320px) {
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.3rem;
+    }
+}
